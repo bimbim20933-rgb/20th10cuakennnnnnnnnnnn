@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng 20/10</title>
+    <style>
+
+      * {
+        box-sizing: border-box;
+      }
+      
+      body {
+        text-align: center;
+        background: linear-gradient(135deg, #2e0854, #18002e, #4a1259);
+        background-size: 400% 400%;
+        animation: gradientBG 12s ease infinite;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 20px 10px;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffd1dc;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      #canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .box {
+        position: relative;
+        z-index: 1;
+        width: 95%;
+        max-width: 380px;
+        padding: 24px 18px;
+        border: 2px solid rgba(255, 192, 203, 0.4);
+        border-radius: 20px;
+        background: rgba(35, 10, 55, 0.75);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
+                    0 0 20px rgba(255, 105, 180, 0.2);
+        transition: transform 0.3s ease;
+      }
+
+      h2 {
+        font-size: 20px;
+        margin-top: 0;
+        margin-bottom: 18px;
+        color: #fff0f5;
+        text-shadow: 0 0 10px rgba(255, 182, 193, 0.6);
+      }
+
+      .btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      button {
+        padding: 12px 16px;
+        background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+        color: #2e0854;
+        font-weight: bold;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 14px;
+        box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+        transition: all 0.2s ease;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+
+      button:active {
+        transform: scale(0.95);
+        box-shadow: 0 2px 6px rgba(255, 105, 180, 0.2);
+      }
+
+      button.active-btn {
+        background: linear-gradient(135deg, #fff, #ffb6c1);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      }
+
+      #result {
+        padding: 16px;
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 182, 193, 0.3);
+        border-radius: 14px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: #fff0f5;
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: inset 0 2px 6px rgba(0,0,0,0.3);
+      }
+
+
+      .fade-in {
+        animation: fadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px) scale(0.96);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      .icon-header {
+        font-size: 32px;
+        margin-bottom: 8px;
+        display: inline-block;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+      }
+    </style>
+  </head>
+  <body>
+
+
+    <canvas id="canvas"></canvas>
+
+    <div class="box">
+      <div class="icon-header">🌸</div>
+      <h2>Hôm nay tâm trạng thế nào?</h2>
+      
+      <div class="btn-group">
+        <button id="btn-vui" onclick="showMood('vui', this)">Cảm thấy vui?</button>
+        <button id="btn-buon" onclick="showMood('buon', this)">Cảm thấy buồn?</button>
+        <button id="btn-met" onclick="showMood('met', this)">Cảm thấy mệt mỏi?</button>
+      </div>
+
+      <div id="result" class="fade-in">
+        Hôm nay thì chắc vui lắm nhỉ? ✨
+      </div>
+    </div>
+
+    <script>
+  
+      function showMood(type, btnElement) {
+        let res = document.getElementById('result');
+        
+
+        let buttons = document.querySelectorAll('.btn-group button');
+        buttons.forEach(b => b.classList.remove('active-btn'));
+        
+
+        if (btnElement) {
+          btnElement.classList.add('active-btn');
+        }
+
+
+        res.classList.remove('fade-in');
+        void res.offsetWidth; 
+        res.classList.add('fade-in');
+
+
+        if (type === 'vui') {
+          res.innerHTML = "Đúng là 1 cô gái dễ thương mà xưng đáng được niềm vui lớn hơn thế nên chúc bạn 20/10 vui vẻ 💖";
+        } else if (type === 'buon') {
+          res.innerHTML = "sau lại buồn thế này,vui vẻ lên chứ bạn tui ơi không có gì nên buồn cả hôm nay là ngày đặc biệt bn nên vui vẻ nhé và chúc tất cả những ngày sau của bn đều luôn vui vẻ 🌸";
+        } else if (type === 'met') {
+          res.innerHTML = "Mệt mỏi hả có càn giúp đỡ gì ko bn ơi hôm nay bn đã là tuyệt vời nhất r nên cứ bước tiếp nhé ☕✨";
+        }
+      }
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const particles = [];
+      const symbols = ['🌸', '✨', '💕', '🌷'];
+
+      for (let i = 0; i < 20; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          size: Math.random() * 14 + 10,
+          speedY: Math.random() * 1 + 0.5,
+          speedX: Math.random() * 0.6 - 0.3,
+          symbol: symbols[Math.floor(Math.random() * symbols.length)]
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        
+        for (let p of particles) {
+          ctx.font = `${p.size}px serif`;
+          ctx.fillText(p.symbol, p.x, p.y);
+          
+          p.y += p.speedY;
+          p.x += p.speedX;
+
+          if (p.y > height) {
+            p.y = -20;
+            p.x = Math.random() * width;
+          }
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    </script>
+
+  </body>
+</html>
